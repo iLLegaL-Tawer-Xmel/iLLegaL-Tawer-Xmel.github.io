@@ -900,7 +900,6 @@ footer {
     top:15px;
 }
 
-
 .footer-bottom h2 span:before {
     left: calc(100% + 20px);
 }
@@ -939,20 +938,12 @@ footer {
     width: 50px;
     display: inline-block;
 }
-
-
-
 p.copyright {
     text-align: center;
     font-size: 12px;
     color: #fff;
     margin: 40px 0 0 0;
 }
-
-
-
-
-
 @media screen and (max-width: 1500px){
     .top-slider .owl-nav button.owl-prev {
         left: calc(50% - 610px);
@@ -963,7 +954,6 @@ p.copyright {
      }
 
 }
-
 @media screen and (max-width: 1420px){
     .owl-carousel:not(.top-slider) .owl-nav button.owl-next {
         right: -10px;
@@ -977,18 +967,12 @@ p.copyright {
     .top-slider .owl-nav button.owl-prev {
         left: 10px;
     }
-
-
-
-
 }
-
 @media screen and (max-width: 1199px){
     .navbar-brand {
         margin-right: 15px;
         width: 200px;
     }
-
     .navbar-collapse .social-networks {
          margin: 0 15px 10px 15px;
      }
@@ -1002,13 +986,7 @@ p.copyright {
     .about-block .blu-button {
         flex-shrink: 0;
     }
-
-
-
-
-
 }
-
 @media screen and (max-width: 991px){
     span.navbar-toggler-icon {
         display: block;
@@ -1104,16 +1082,7 @@ p.copyright {
     .clients-section {
         padding: 50px 0;
     }
-
-
-
-
-
-
 }
-
-
-
 @media screen and (max-width: 767px){
     .top-slide>.container, .top-slide, .slide-text {
         height: 400px;
@@ -1152,7 +1121,6 @@ p.copyright {
     .writer p {
         margin-bottom: 5px;
     }
-
 }
 @media screen and (max-width: 480px){
     .navbar-brand {
