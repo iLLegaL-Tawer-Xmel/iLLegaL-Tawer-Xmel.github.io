@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css"/>
     <link rel="stylesheet" href="./styles.css"/>
 </head>
-
 <body>
+
 
 <header>
     <div class="container">
@@ -1018,6 +1018,167 @@
     </div>
 </footer>
 
-</body>
 
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+
+
+<script src="./js/owl.carousel.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.top-slider').owlCarousel({
+            autoplay: false,
+            autoplayTimeout: 6000,
+            loop: true,
+            autoplaySpeed: 500,
+            items: 1,
+            dotsEach: true,
+            center: false,
+            responsive: {
+                0: {
+                    nav: false,
+                    dots: true
+                },
+                992: {
+                    nav: true,
+                    dots: true
+                }
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('.projects-slider').owlCarousel({
+            autoWidth: false,
+            autoplay: false,
+            autoplayTimeout: 6000,
+            loop: true,
+            autoplaySpeed: 500,
+            items: 1,
+            margin: 18,
+            nav: true,
+            dots: false,
+            dotsEach: true,
+            center: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                767: {
+                    margin: 18,
+                    items: 2
+                },
+                992: {
+                    margin: 30,
+                    items: 3
+                },
+                1200: {
+
+                    margin: 30,
+                    items: 4
+                }
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('.team-slider').owlCarousel({
+            autoWidth: false,
+            autoplay: false,
+            autoplayTimeout: 6000,
+            loop: true,
+            autoplaySpeed: 500,
+            items: 1,
+            margin: 18,
+            nav: true,
+            dots: false,
+            dotsEach: false,
+            center: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                767: {
+                    margin: 18,
+                    items: 2
+                },
+                992: {
+                    margin: 30,
+                    items: 3
+                },
+                1200: {
+
+                    margin: 30,
+                    items: 4
+                }
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('.news-slider').owlCarousel({
+            autoplay: false,
+            autoplayTimeout: 6000,
+            loop: true,
+            autoplaySpeed: 500,
+            items: 1,
+            margin: 18,
+            dotsEach: true,
+            center: false,
+            nav: true,
+            dots: false,
+            responsive: {
+                1: {
+                    margin: 30,
+                    items: 1
+                },
+                1200: {
+                    margin: 30,
+                    items: 2
+                }
+            }
+        });
+
+    });
+
+    $(document).ready(function () {
+        $('.clients-slider').owlCarousel({
+            autoplay: false,
+            autoplayTimeout: 6000,
+            loop: true,
+            autoplaySpeed: 500,
+            items: 1,
+            margin: 18,
+            nav: true,
+            dots: false,
+            dotsEach: true,
+            center: false,
+            responsive: {
+                0: {
+                    margin: 10,
+                    items: 2
+                },
+                767: {
+                    margin: 10,
+                    items: 4
+                },
+                992: {
+                    margin: 10,
+                    items: 6
+                },
+                1200: {
+
+                    margin: 30,
+                    items: 8
+                }
+            }
+        });
+        var height = $('.clients-slider .owl-stage').height();
+        $('.clients-slider .item').height(height)
+    });
+
+
+</script>
+
+</body>
 </html>
