@@ -15,7 +15,7 @@
     <title>Xmel 35</title>
         <!--(META)
             Индексации поисковиками и кодировка (свойства интернет-страницы)
-            name - имя
+            name - имя свойства
             content - значение свойства
             scheme - имя схема для для обработки значения свойства
             http-equiv - вместо атрибута name для имени http-сообщения
@@ -23,9 +23,16 @@
             dir - направленность текста
         -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--X-UA-Compatible указывает версию IE, для которой была разработана страница
+    IE=edge означает, что IE должен использовать последнюю
+        (крайнюю) версию своего движка рендеринга-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <!--Meta-тег viewport сообщает браузеру о том, 
+        как именно обрабатывать размеры страницы-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="robots" content="noindex, nofollow">
+    <!--<noindex>...</noindex> – тег, который предложили использовать 
+        поисковые системы для запрета индексации заключенного в него контента-->
     <meta property="og:title" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
@@ -1041,7 +1048,13 @@
     </div>
 </footer>
 
-
+<!--(SCRIPT)
+    type - язык скрипта, на котором он написан (тип содержимого)
+    src - месторасположение внешнего скрипта
+    language - язык скрипта, содержащегося в элементе (нежелателен - лучше type)
+    defer - указывает браузеру, что скрипт не будет генерировать содержимое текста
+    charset - кодировка символов
+    -->
 <script src="./js/jquery-3.2.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 
