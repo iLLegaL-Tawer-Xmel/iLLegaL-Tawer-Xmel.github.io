@@ -1154,5 +1154,5 @@ p.copyright {
     header img { -webkit-filter: invert(100%);
     filter: invert(100%); }
 
-    h1, form, div#header, div#footer { display: none; }
+    h3, div#header, div#footer { display: none; }
 }
