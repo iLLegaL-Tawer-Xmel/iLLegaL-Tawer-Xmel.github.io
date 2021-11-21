@@ -1147,9 +1147,4 @@ p.copyright {
         font-size: 20px;
     }
 }
-@media print { /*для печати*/
-    body{
-     font-family: Arial, Helvetica, sans-serif; color:black;
-    }
-    #header, #footer{display:none}
-}
+@media print { /* print styles go here */ body { font-size: 28px; }}
