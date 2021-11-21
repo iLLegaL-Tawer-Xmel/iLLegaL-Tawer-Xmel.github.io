@@ -1148,8 +1148,8 @@ p.copyright {
     }
 }
 @media print {
-    div#form, div#header, div#footer { display: none; }
-    
+    a, form, div#header, div#footer { display: none; }
+
     background-image: none
     * { -webkit-print-color-adjust: exact; }
     header { background: none; color: #000; }
