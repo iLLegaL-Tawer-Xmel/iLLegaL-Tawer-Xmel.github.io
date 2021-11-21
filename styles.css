@@ -1148,7 +1148,11 @@ p.copyright {
     }
 }
 @media print {
-    #sidebar,header,footer,#comments {
-        display: none;
-    }
-} 
+
+  body {
+    margin: 0;
+    color: #000;
+    background-color: #fff;
+  }
+
+}
