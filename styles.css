@@ -1148,7 +1148,7 @@ p.copyright {
     }
 }
 @media print {
-    .blu-button, .header-r, form, input, button, footer { display: none !important; }
+    .blu-button, .black-button, .social-networks, .header-r, form, input, button, footer { display: none !important; }
     background-image: none
     header { 
         background: none; 
@@ -1172,7 +1172,4 @@ p.copyright {
     .team-section {
          page-break-after: always;
     }
-
-
-
 }
