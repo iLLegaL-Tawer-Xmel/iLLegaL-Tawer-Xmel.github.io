@@ -1147,4 +1147,10 @@ p.copyright {
         font-size: 20px;
     }
 }
-@media print { /* print styles go here */ body { font-size: 28px; }}
+@media print { 
+    section { margin-bottom: 2cm;}
+    @page { margin: 1cm; }
+    p { widows: 4;}
+    header { -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+    
+}
