@@ -1158,7 +1158,6 @@ p.copyright {
         -webkit-filter: color: #000;
         filter: invert(100%); 
     }
-
     @page { margin: 10% 10% 10% 10%; }
     .about-section {
         margin: -10% 0% 0% 0%;
@@ -1170,6 +1169,6 @@ p.copyright {
         page-break-after: always;
     }
     .team-section {
-         page-break-after: always;
+        page-break-after: always;
     }
 }
