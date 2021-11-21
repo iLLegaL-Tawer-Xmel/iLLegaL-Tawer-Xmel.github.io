@@ -1148,13 +1148,31 @@ p.copyright {
     }
 }
 @media print {
-    a, form, div#header, div#footer { display: none; }
-
+    .blu-button, .header-r, form, input, button, footer { display: none !important; }
     background-image: none
-    * { -webkit-print-color-adjust: exact; }
-    header { background: none; color: #000; }
-    header img { -webkit-filter: invert(100%);
-    filter: invert(100%); }
+    header { 
+        background: none; 
+        color: #000; 
+    }
+    header img { 
+        -webkit-filter: color: #000;
+        filter: invert(100%); 
+    }
 
-    
+    @page { margin: 10% 10% 10% 10%; }
+    .about-section {
+        margin: -10% 0% 0% 0%;
+    }
+    .h2-tm {
+        margin-bottom: 20px;
+    }
+    .projects-section {
+        page-break-after: always;
+    }
+    .team-section {
+         page-break-after: always;
+    }
+
+
+
 }
