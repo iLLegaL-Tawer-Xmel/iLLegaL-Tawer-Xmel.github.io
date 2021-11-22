@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./filter.css"/>
 
     <link rel="stylesheet" type="text/css" href="./styles.css" media="print" />
+
 </head>
 
 <body>
@@ -80,7 +81,7 @@
 <main>
     <section class="top-section">
         <div class="top-slider owl-carousel owl-theme">
-            <div class="item">
+            <div class="item_header">
                 <div class="top-slide top-slide1">
                     <div class="container">
                         <div class="slide-text">
@@ -88,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item">
+            <div class="item_header">
                 <div class="top-slide top-slide2">
                     <div class="container">
                         <div class="slide-text">
@@ -96,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item">
+            <div class="item_header">
                 <div class="top-slide top-slide1">
                     <div class="container">
                         <div class="slide-text">
@@ -122,17 +123,171 @@
             <h2 class="h2-tm">
                 <span>Product Selection</span>
             </h2>
-            <nav>
-                <ul>
-                    <li data-f="all">Все вкладки</li>
-                    <li data-f="alizarin" class="text-alizarin">Платформа</li>
-                    <li data-f="wisteria" class="text-wisteria">Категория</li>
-                    <li data-f="emerland" class="text-emerland">Рейтинг</li>
-                    <li data-f="sunflower" class="text-sunflower">Средняя цена</li>
-                </ul>
-            </nav>
-
-            <div class="block-cover">
+            <div class="nav2">
+                <nav class="categories">
+                    <div class="category">
+                    <h3>Платформа</h3>
+                    <ul class="platform-ul">
+                        <li>
+                            <label>
+                                <input name="platform" class="all" value="all" type="checkbox" checked>
+                                <span class="fake"></span>
+                                <span>Любая</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="platform" value="Android" type="checkbox">
+                                <span class="fake"></span>
+                                <span>Android</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="platform" value="IOS" type="checkbox">
+                                <span class="fake"></span>
+                                <span>IOS</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="platform" value="Linux" type="checkbox">
+                                <span class="fake"></span>
+                                <span>Linux</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="platform" value="Windows" type="checkbox">
+                                <span class="fake"></span>
+                                <span>Windows</span>
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="category">
+                    <h3>Категория</h3>
+                    <ul class="category-ul">
+                        <li>
+                            <label>
+                                <input name="category" class="all" value="all" type="checkbox" checked>
+                                <span class="fake"></span>
+                                <span>Любая</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="category" value="Прикладное" type="checkbox">
+                                <span class="fake"></span>
+                                <span>Прикладное</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="category" value="Системное" type="checkbox">
+                                <span class="fake"></span>
+                                <span>Системное</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="category" value="Инструментальное" type="checkbox">
+                                <span class="fake"></span>
+                                <span>Инструментальное</span>
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="category">
+                    <h3>Рейтинг</h3>
+                    <ul class="rating-ul">
+                        <li>
+                            <label>
+                                <input name="rating" class="all" value="all" type="checkbox" checked>
+                                <span class="fake"></span>
+                                <span>Любой</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="rating" value="1_3" type="checkbox">
+                                <span class="fake"></span>
+                                <span>1/3</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="rating" value="3_6" type="checkbox">
+                                <span class="fake"></span>
+                                <span>4/6</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="rating" value="7_9" type="checkbox">
+                                <span class="fake"></span>
+                                <span>7/9</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="rating" value="m10" type="checkbox">
+                                <span class="fake"></span>
+                                <span>10/➜</span>
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="category">
+                    <h3>Средняя цена</h3>
+                    <ul class="price-ul">
+                        <li>
+                            <label>
+                                <input name="price" class="all" value="all" type="checkbox" checked>
+                                <span class="fake"></span>
+                                <span>Любая</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="price" value="0_200" type="checkbox">
+                                <span class="fake"></span>
+                                <span>0/200$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="price" value="200_500" type="checkbox">
+                                <span class="fake"></span>
+                                <span>200/500$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="price" value="500_1000" type="checkbox">
+                                <span class="fake"></span>
+                                <span>500/1000$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="price" value="1000_2000" type="checkbox">
+                                <span class="fake"></span>
+                                <span>1000/2000$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input name="price" value="m2000" type="checkbox">
+                                <span class="fake"></span>
+                                <span>2000$/➜</span>
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
+                </nav>
+            </div>
+            <!--<div class="block-cover">
                 <div class="sunflower1 box sunflower">
                     <style>
                         .sunflower1 {
@@ -140,7 +295,6 @@
                             background-size: 100% 100%;
                         }
                     </style>
-
                 </div>
                 <div class="sunflower2 box sunflower">
                     <style>
@@ -158,7 +312,7 @@
                         }
                     </style>
                 </div>
-                <div class="alizarin1 box alizarin"><h3>
+                <div class="alizarin1 box alizarin">
                     <style>
                         .alizarin1 {
                             background-image: url(./images/filter/android.png);
@@ -214,13 +368,14 @@
                         }
                     </style>
                 </div>
-                <div class="alizarin2 box alizarin"></div>
-                <style>
+                <div class="alizarin2 box alizarin">
+                    <style>
                         .alizarin2 {
                             background-image: url(./images/filter/ios.png);
                             background-size: 100% 100%;
                         }
                     </style>
+                </div> 
                 <div class="sunflower4 box sunflower">
                     <style>
                         .sunflower4 {
@@ -261,162 +416,16 @@
                         }
                     </style>
                 </div>
+            </div>-->
+            <div>
+                <ul class="items-list">
+
+
+
+                </ul>
             </div>
-            <nav class="categories">
-                <div class="category">
-                    <h3>Платформа</h3>
-                    <ul class="genre-ul">
-                        <li>
-                            <label>
-                                <input id="cbga" name="genre" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любая</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Комедия" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Android</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Боевик" type="checkbox">
-                                <span class="fake"></span>
-                                <span>IOS</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Детектив" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Linux</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Детектив" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Windows</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="category">
-                    <h3>Категория</h3>
-                    <ul class="year-ul">
-                        <li>
-                            <label>
-                                <input name="year" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любая</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="year" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Прикладное</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="year" value="l2010" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Системное</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="year" value="2010_2017" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Инструментальное</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="category">
-                    <h3>Рейтинг</h3>
-                    <ul class="rating-ul">
-                        <li>
-                            <label>
-                                <input name="rating" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любой</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="l6" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Менее 6</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="6_8" type="checkbox">
-                                <span class="fake"></span>
-                                <span>От 6 до 8</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="m8" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Выше 8</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="category">
-                    <h3>Средняя цена</h3>
-                    <ul class="genre-ul">
-                        <li>
-                            <label>
-                                <input id="cbga" name="genre" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любая</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Комедия" type="checkbox">
-                                <span class="fake"></span>
-                                <span>100$-200$</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Боевик" type="checkbox">
-                                <span class="fake"></span>
-                                <span>200$-500$</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Детектив" type="checkbox">
-                                <span class="fake"></span>
-                                <span>500$-1000$</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Детектив" type="checkbox">
-                                <span class="fake"></span>
-                                <span>1000$-2000$</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="genre" value="Детектив" type="checkbox">
-                                <span class="fake"></span>
-                                <span>2000$-5000$</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            
+            
         </div>
         </div>
     </section>
@@ -541,6 +550,7 @@
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/owl.carousel.js"></script>
 <script src="./js/filter.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -694,6 +704,7 @@
         var height = $('.clients-slider .owl-stage').height();
         $('.clients-slider .item').height(height)
     });
+
 </script>
 
 </body>

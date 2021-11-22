@@ -290,7 +290,22 @@ nav.navbar:after {
     justify-content: center;
     margin-right: 29px;
 }
-
+.item_header {
+    display: block;
+    
+    color: white;
+    font-size: 18pt;
+    margin: 0.8%;
+    width: 22%;
+    min-height: 150px;
+    background-image: url("../images/filter-page/films-logo/2012tsunami.jfif");
+    border-radius: 5%;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    background-position: center;
+    background-size: cover;
+}
 .navbar-light .navbar-nav .nav-link {
     color: #373645;
     padding: 0;
@@ -1175,88 +1190,104 @@ p.copyright {
 }
 
 .h2-tm {
-    margin-bottom: 20px;
+    margin-bottom: 70px;
 }
-.services-section .container nav, .services-section .container ul, .services-section .container li {
-    display: inline-block;
-    padding: 10px 40px 10px 0;
-    cursor: pointer;
+.services-section .container .nav2 nav {
     font-size: 20px;
-    text-align: center;
-    font-weight: 900;
-    position: relative;
-    text-transform: uppercase;
+    color: blueviolet;
+    font-family: "Arkhip";
 }
-.services-section .container nav {
-    position: absolute;
-    left: 0px;
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 40px;
-    margin-left: 4%;
+.services-section .container .nav2 nav, .services-section .container .nav2 ul, .services-section .container .nav2 li {
+    
 }
-.services-section {
-    height: 1650px;
+.services-section .container .nav2 ul, .services-section .container .nav2 li {
+    display: block; padding: 0; margin: 0;
+
+    font-style: italic;
+    font-family: "Arkhip";
 }
-.services-section .container .block-cover {
-    margin-top: 10%;
-    margin-right: -3%;
+.categories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-left: 8%;
+    margin-right: 8%;
 }
-.services-section .container .categories {
+.category {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin: 0% 5% 5% 5%;
+
+}
+.category label > input {
     display: none;
 }
-.services-section .container .block-cover .box.alizarin {
-    border: 3px solid #e74c3c;
+.category label > span:not(.fake) {
+    color: black;
+    font-size: 17pt;
 }
-.services-section .container .block-cover .box.wisteria {
-    border: 3px solid #8e44ad;
+.fake {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px black solid;
+    border-radius: 25%;
 }
-.services-section .container .block-cover .box.emerland {
-    border: 3px solid #2ecc71;
+.fake::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    opacity: 0;
+    transition: .3s;
+    border-radius: 25%
 }
-.services-section .container .block-cover .box.sunflower {
-    border: 3px solid #f1c40f;
-}
-.text-alizarin {
-    color: #e74c3c;
-}
-.text-wisteria {
-    color: #8e44ad;
-}
-.text-emerland {
-    color: #2ecc71;
-}
-.text-sunflower {
-    color: #f1c40f;
-}
-
-.services-section .container .block-cover .box {
-    border-radius: 4px;
-    box-shadow: 6px 7px 28px 0 rgba(16, 16, 16, 0.7);
-    min-height: 200px;
-    min-width: calc(32% - 28px);
-    max-height: 200px;
-    max-width: calc(32% - 28px);
-    padding: 0 10px;
-    margin: 15px;
-    float: left;
-    align-items: center;
-}
-
-.hide {
+.category label > input:checked + .fake::before{
     opacity: 1;
-    animation-name: a1;
-    animation-duration: 4s;
-    animation-fill-mode: forwards;
 }
-@keyframes a1 {
-    to {
-        opacity: 0;
-        min-height: 0;
-        min-width: 0;
-        padding: 0;
-        margin: 0;
-        border: 0;
-    }
+.category label > input:disabled + .fake{
+    opacity: .3;
+}
+.items-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10%;
+    flex-wrap: wrap;
+}
+.item {
+    display: block;
+    text-align: center;
+    font-style: italic;
+
+    font-family: "Comic Sans MS";
+    color: white;
+    font-size: 18pt;
+    margin: 0.8%;
+    width: 30%;
+    min-height: 150px;
+    background-image: url("./images/filter/category-1.png");
+    border-radius: 7%;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    background-position: center;
+    background-size: cover;
+}
+
+
+.services-section .container .nav2 .categories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-left: 8%;
+    margin-right: 8%;
+
 }
