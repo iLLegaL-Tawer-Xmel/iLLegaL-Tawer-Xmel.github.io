@@ -14,10 +14,6 @@ const software = [
 { name:"Название №58", platform: "Android", category: "Системное", rating: "12.7", price: "350", img: "category-2.png" },
 { name:"Название №4", platform: "Linux", category: "Прикладное", rating: "9.7", price: "2690", img: "category-1.png" },
 { name:"Название №7", platform: "Windows", category: "Инструментальное", rating: "6.6", price: "590", img: "slide-3.png" }
-
-
-
-
 ];
 const properties = {
 	'platform':    { type: 'not_num',  index: 0 ,  val: ['Android', 'IOS', 'Linux', 'Windows']},

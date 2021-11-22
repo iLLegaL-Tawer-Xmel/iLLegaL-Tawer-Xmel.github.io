@@ -1147,6 +1147,10 @@ p.copyright {
     }
 }
 
+
+
+
+
 .h2-tm {
     margin-bottom: 70px;
 }
@@ -1224,7 +1228,6 @@ p.copyright {
     display: block;
     text-align: center;
     font-style: italic;
-
     font-family: "Comic Sans MS";
     color: white;
     font-size: 18pt;
@@ -1239,7 +1242,6 @@ p.copyright {
     background-position: center;
     background-size: cover;
 }
-
 
 .services-section .container .nav2 .categories {
     display: flex;
