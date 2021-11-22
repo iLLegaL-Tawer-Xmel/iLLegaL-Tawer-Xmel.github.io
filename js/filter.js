@@ -22,8 +22,8 @@ const software = [
 const properties = {
 	'platform':    { type: 'not_num',  index: 0 ,  val: ['Android', 'IOS', 'Linux', 'Windows']},
 	'category':     { type: 'not_num',    index: 1,     val: ['Прикладное', 'Системное', 'Инструментальное']},
-	'rating':   { type: 'num',    index: 2,     val: ['1_3', '4_6', '7_9', 'm10']},
-    'price':     { type: 'num',    index: 3,     val: ['l200', '200_500', '500_1000', '1000_2000', 'm2000']}
+	'rating':   { type: 'num',    index: 2,     val: ['1_3', '3_6', '6_8', 'm8']},
+    'price':     { type: 'num',    index: 3,     val: ['0_200', '200_500', '500_1000', '1000_2000', 'm2000']}
 };
 
 var arr_all = [];
