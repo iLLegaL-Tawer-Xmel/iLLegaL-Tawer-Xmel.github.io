@@ -1147,32 +1147,6 @@ p.copyright {
     }
 }
 
-@media print {
-    .blu-button, .black-button, .social-networks, .header-r, form, input, button, footer { display: none !important; }
-    background-image: none
-    header { 
-        background: none; 
-        color: #000; 
-    }
-    header img { 
-        -webkit-filter: color: #000;
-        filter: invert(100%); 
-    }
-    @page { margin: 10% 10% 10% 10%; }
-    .about-section {
-        margin: -10% 0% 0% 0%;
-    }
-    .h2-tm {
-        margin-bottom: 20px;
-    }
-    .projects-section {
-        page-break-after: always;
-    }
-    .team-section {
-        page-break-after: always;
-    }
-}
-
 .h2-tm {
     margin-bottom: 70px;
 }
