@@ -290,22 +290,6 @@ nav.navbar:after {
     justify-content: center;
     margin-right: 29px;
 }
-.item_header {
-    display: block;
-    
-    color: white;
-    font-size: 18pt;
-    margin: 0.8%;
-    width: 22%;
-    min-height: 150px;
-    background-image: url("../images/filter-page/films-logo/2012tsunami.jfif");
-    border-radius: 5%;
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
-    background-position: center;
-    background-size: cover;
-}
 .navbar-light .navbar-nav .nav-link {
     color: #373645;
     padding: 0;
