@@ -125,7 +125,7 @@ function correctCheckBoxes(className, index) {
             }
         });
         $.each($(className + ' input:not(.all):checked'), function(index, value){
-            if ($(value).is(':disabled') != false) { // ТУТ БЛЯТЬ == было стало !=
+            if ($(value).is(':disabled') == false) { 
                 selectedEnableCount++;
             }
         });
