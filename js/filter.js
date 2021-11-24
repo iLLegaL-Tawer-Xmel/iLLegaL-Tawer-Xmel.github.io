@@ -31,28 +31,29 @@ $(document).ready(function()
 	printsoftware(software, '.items-list');
 	$('.categories input').change(function()
 	{
-        // Корректирую комбобоксы, чтобы работать с чб-сами Все
+        // Корректировка чекбоксов
         correctAllCheckBoxes(properties);
-        // Получаю текущий фильтр
+        // Текущий фильтр
         var curFilter = readCurFilters(properties);
-        // Блокирую чекбоксы, при которых не будет результатов
+        // Блокировка чекбоксов, при которых не будет результатов
         blockBadCheckBoxes(curFilter);
-        // Получаю по фильтрам фильмы
+        // Получение по фильтрам ПО
 		var filteredsoftware = applyFilters(software, curFilter, properties);
-        // Показываю юзеру фильмы
+        // ПО
 		printsoftware( filteredsoftware, '.items-list' );
 	});
 });
 
 function blockBadCheckBoxes(filter) {
-    // index это 'genre', 'year', 'rating'
-    // value это объект
-    // value.val это 
 
     $.each(properties, function (index, value) {
         value.val.forEach(element => {
             var item = $("." + index + "-ul input[value='" + element + "']");
-            item.prop('disabled', getNumOfsoftware(Object.assign({}, filter), element, index) == 0);
+            if (getNumOfsoftware(Object.assign({}, filter), element, index) == 0)
+                item.prop('disabled', true);
+            else {
+                item.prop('disabled', false);
+            }
         });
     });
 }
@@ -100,7 +101,6 @@ function filtersoftTypeNotNum(soft, filter, Index, Value) {
 }
 
 function filtersoftTypeNum(soft, filter, Index, Value) {
-    // Index is 'genre', 'year' or 'rating'
     var ok = false;
 
     Value.val.forEach(element => {
@@ -133,14 +133,11 @@ function correctAllCheckBoxes(properties) {
     $.each(properties, function(index, value) {
         var className = '.' + index + '-ul';
         var ind = value.index;
-        //console.log('CLASSNAME = ', className, '   INDEX = ', ind);
         correctCheckBoxes(className, ind);
     });
 }
 
 function correctCheckBoxes(className, index) {
-    // селектор для not all input  '.genre-ul input:not(.all)'
-    // селектор для all .genre-ul .all
 
     var all = $(className + ' .all');
     var items = $(className + ' input:not(.all)');
@@ -164,7 +161,7 @@ function correctCheckBoxes(className, index) {
                 selectedEnableCount++;
             }
         });
-        // Если юзер выбрал все элементы или ни одного загорается чб all. Иначе он неактивен
+        // Если выбраны все элементы или ни одного - загорается чекбокс all. Иначе он неактивен
         all.prop('checked', (count == 0 || enableItemsCount == selectedEnableCount));
     }
     arr_all[index] = all.is(':checked');
@@ -179,7 +176,6 @@ function readCurFilters(properties) {
 		}).get(); 
 		result[index] = searchIDs;
     });
-    //console.log(result);
 	return result;
 }
 
