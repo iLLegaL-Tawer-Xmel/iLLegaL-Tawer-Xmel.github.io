@@ -1178,7 +1178,6 @@ p.copyright {
     flex-direction: column;
     text-align: start;
     margin: 0% 5% 5% 5%;
-
 }
 .category label > input {
     display: none;
@@ -1246,5 +1245,4 @@ p.copyright {
     flex-wrap: wrap;
     margin-left: 8%;
     margin-right: 8%;
-
 }

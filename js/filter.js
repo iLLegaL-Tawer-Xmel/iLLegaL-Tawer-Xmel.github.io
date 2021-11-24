@@ -1,3 +1,7 @@
+/* 
+    Данные
+*/
+
 const software = [  
 { name:"Название №15", platform: "Android", category: "Прикладное", rating: "3.4", price: "540", img: "category-1.png" },
 { name:"Название №239", platform: "Windows", category: "Системное", rating: "8.5", price: "1200", img: "category-2.png" },
@@ -15,6 +19,7 @@ const software = [
 { name:"Название №4", platform: "Linux", category: "Прикладное", rating: "9.7", price: "2690", img: "category-1.png" },
 { name:"Название №7", platform: "Windows", category: "Инструментальное", rating: "6.6", price: "590", img: "slide-3.png" }
 ];
+
 const properties = {
 	'platform':    { type: 'not_num',  index: 0 ,  val: ['Android', 'IOS', 'Linux', 'Windows']},
 	'category':     { type: 'not_num',    index: 1,     val: ['Прикладное', 'Системное', 'Инструментальное']},
@@ -22,34 +27,73 @@ const properties = {
     'price':     { type: 'num',    index: 3,     val: ['0_200', '200_500', '500_1000', '1000_2000', 'm2000']}
 };
 
-var arr_all = [];
+function printSoftware(softwareArray, selector) {
+    const template = 
+'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> <p class="software-price">{{price}}$</p> </li>';
+    var output = "";
+
+    softwareArray.forEach(element => {
+        var tmpItem;
+        tmpItem = template.replace('{{name}}', element.name);
+        tmpItem = tmpItem.replace('{{platform}}', element.platform);
+        tmpItem = tmpItem.replace('{{category}}', element.category);
+        tmpItem = tmpItem.replace('{{rating}}', element.rating);
+        tmpItem = tmpItem.replace('{{price}}', element.price);
+        
+        output+= tmpItem;
+    });
+    $(selector).html(output);
+
+    $.each($(".item"), function(index, value) {
+
+        value.style.backgroundImage = "url('./images/filter/" + softwareArray[index].img + "')";
+    });
+}
+
+var arrOfEls = [];
 
 $(document).ready(function()
 {
-    $.each(properties, function(){arr_all.push(true);});
+    $.each(properties, function(){arrOfEls.push(true);});
 
-	printsoftware(software, '.items-list');
-	$('.categories input').change(function()
-	{
+    printSoftware(software, '.items-list');
+    $('.categories input').change(function()
+    {
         // Корректировка чекбоксов
         correctAllCheckBoxes(properties);
+
         // Текущий фильтр
         var curFilter = readCurFilters(properties);
+
         // Блокировка чекбоксов, при которых не будет результатов
         blockBadCheckBoxes(curFilter);
+
+        // Корректировка чекбоксов
+        correctAllCheckBoxes(properties);
+
         // Получение по фильтрам ПО
-		var filteredsoftware = applyFilters(software, curFilter, properties);
+        var filteredsoftware = applyFilters(software, readCurFilters(properties), properties);
+
         // ПО
-		printsoftware( filteredsoftware, '.items-list' );
-	});
+        printSoftware( filteredsoftware, '.items-list' );
+    });
 });
 
+/* 
+    CheckBoxes
+*/
+
+function getNumOfSoftware(filter, pushItem, index) {
+    filter[index] = [pushItem];
+    return applyFilters(software, filter, properties).length;
+}
+// Блокировка чекбоксов, при которых не будет результатов
 function blockBadCheckBoxes(filter) {
 
     $.each(properties, function (index, value) {
         value.val.forEach(element => {
             var item = $("." + index + "-ul input[value='" + element + "']");
-            if (getNumOfsoftware(Object.assign({}, filter), element, index) == 0)
+            if (getNumOfSoftware(Object.assign({}, filter), element, index) == 0)
                 item.prop('disabled', true);
             else {
                 item.prop('disabled', false);
@@ -57,11 +101,51 @@ function blockBadCheckBoxes(filter) {
         });
     });
 }
+// Корректировка чекбоксов
+function correctAllCheckBoxes(properties) {
+    $.each(properties, function(index, value) {
+        var className = '.' + index + '-ul';
+        var ind = value.index;
+        correctCheckBoxes(className, ind);
+    });
+}
+function correctCheckBoxes(className, index) {
 
-function getNumOfsoftware(filter, pushItem, index) {
+    var all = $(className + ' .all');
+    var items = $(className + ' input:not(.all)');
+    var count = $(className + ' input:not(.all):checked').length;
+
+    if (all.is(':checked') && arrOfEls[index] == false) // нажали на all
+    {
+        items.prop('checked', true);
+    }
+    else
+    {
+        var enableItemsCount = 0;
+        var selectedEnableCount = 0;
+        $.each(items, function(index, value){
+            if ($(value).is(':disabled') == false) {
+                enableItemsCount++;
+            }
+        });
+        $.each($(className + ' input:not(.all):checked'), function(index, value){
+            if ($(value).is(':disabled') == false) {
+                selectedEnableCount++;
+            }
+        });
+        // Если выбраны все элементы или ни одного - загорается чекбокс all. Иначе он неактивен
+        all.prop('checked', (count == 0 || enableItemsCount == selectedEnableCount));
+    }
+    arrOfEls[index] = all.is(':checked');
+}
+function getNumOfSoftware(filter, pushItem, index) {
     filter[index] = [pushItem];
     return applyFilters(software, filter, properties).length;
 }
+
+/* 
+    Filters
+*/
 
 function applyFilters(software, filter, properties) {
     var result = [];
@@ -90,8 +174,8 @@ function applyFilters(software, filter, properties) {
             if (element == false) thatsoftIsOk = false;
         });
         if (thatsoftIsOk) result.push(soft);
-	});
-	return result;
+    });
+    return result;
 }
 
 function filtersoftTypeNotNum(soft, filter, Index, Value) {
@@ -128,76 +212,15 @@ function filtersoftTypeNum(soft, filter, Index, Value) {
     });
     return ok;
 }
-
-function correctAllCheckBoxes(properties) {
-    $.each(properties, function(index, value) {
-        var className = '.' + index + '-ul';
-        var ind = value.index;
-        correctCheckBoxes(className, ind);
-    });
-}
-
-function correctCheckBoxes(className, index) {
-
-    var all = $(className + ' .all');
-    var items = $(className + ' input:not(.all)');
-    var count = $(className + ' input:not(.all):checked').length;
-
-    if (all.is(':checked') && arr_all[index] == false) // нажали на all
-    {
-        items.prop('checked', true);
-    }
-    else
-    {
-        var enableItemsCount = 0;
-        var selectedEnableCount = 0;
-        $.each(items, function(index, value){
-            if ($(value).is(':disabled') == false) {
-                enableItemsCount++;
-            }
-        });
-        $.each($(className + ' input:not(.all):checked'), function(index, value){
-            if ($(value).is(':disabled') == false) {
-                selectedEnableCount++;
-            }
-        });
-        // Если выбраны все элементы или ни одного - загорается чекбокс all. Иначе он неактивен
-        all.prop('checked', (count == 0 || enableItemsCount == selectedEnableCount));
-    }
-    arr_all[index] = all.is(':checked');
-}
-
+// Текущий фильтр
 function readCurFilters(properties) {
     var result = [];
 
     $.each(properties, function(index){
         var searchIDs = $(".categories input[name='" + index + "']:checkbox:checked").map(function(){
-			return $(this).val();
-		}).get(); 
-		result[index] = searchIDs;
+            return $(this).val();
+        }).get(); 
+        result[index] = searchIDs;
     });
-	return result;
-}
-
-function printsoftware(softwareArray, selector) {
-    const template = 
-'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> <p class="software-price">{{price}}$</p> </li>';
-    var output = "";
-
-    softwareArray.forEach(element => {
-        var tmpItem;
-        tmpItem = template.replace('{{name}}', element.name);
-        tmpItem = tmpItem.replace('{{platform}}', element.platform);
-        tmpItem = tmpItem.replace('{{category}}', element.category);
-        tmpItem = tmpItem.replace('{{rating}}', element.rating);
-        tmpItem = tmpItem.replace('{{price}}', element.price);
-        
-        output+= tmpItem;
-    });
-    $(selector).html(output);
-
-    $.each($(".item"), function(index, value) {
-
-        value.style.backgroundImage = "url('./images/filter/" + softwareArray[index].img + "')";
-    });
+    return result;
 }
