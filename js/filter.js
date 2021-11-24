@@ -185,7 +185,7 @@ function readCurFilters(properties) {
 
 function printsoftware(softwareArray, selector) {
     const template = 
-'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> <p class="software-price">{{price}}</p> </li>';
+'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> <p class="software-price">{{price}}$</p> </li>';
     var output = "";
 
     softwareArray.forEach(element => {
