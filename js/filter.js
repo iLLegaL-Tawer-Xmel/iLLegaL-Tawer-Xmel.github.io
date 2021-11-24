@@ -3,21 +3,21 @@
 */
 
 const software = [  
-{ name:"Название №15", platform: "Android", category: "Прикладное", rating: "3.4", price: "540", img: "category-1.png" },
-{ name:"Название №239", platform: "Windows", category: "Системное", rating: "8.5", price: "1200", img: "category-2.png" },
-{ name:"Название №41", platform: "IOS", category: "Прикладное", rating: "11.3", price: "5100", img: "category-1.png" },
-{ name:"Название №57", platform: "IOS", category: "Прикладное", rating: "8.9", price: "590", img: "category-1.png" },
-{ name:"Название №2", platform: "Windows", category: "Системное", rating: "4.7", price: "3450", img: "category-2.png" },
-{ name:"Название №21", platform: "Linux", category: "Инструментальное", rating: "8.7", price: "2150", img: "slide-3.png" },
-{ name:"Название №296", platform: "Android", category: "Инструментальное", rating: "11.2", price: "8450", img: "slide-3.png" },
-{ name:"Название №79", platform: "Windows", category: "Прикладное", rating: "6.9", price: "150", img: "category-1.png" },
-{ name:"Название №12", platform: "Windows", category: "Прикладное", rating: "8.1", price: "233", img: "category-1.png" },
-{ name:"Название №389", platform: "IOS", category: "Прикладное", rating: "2.3", price: "90", img: "category-1.png" },
-{ name:"Название №36", platform: "Linux", category: "Системное", rating: "4.8", price: "665", img: "category-2.png" },
-{ name:"Название №38", platform: "Windows", category: "Инструментальное", rating: "8.2", price: "600", img: "slide-3.png" },
-{ name:"Название №58", platform: "Android", category: "Системное", rating: "12.7", price: "350", img: "category-2.png" },
-{ name:"Название №4", platform: "Linux", category: "Прикладное", rating: "9.7", price: "2690", img: "category-1.png" },
-{ name:"Название №7", platform: "Windows", category: "Инструментальное", rating: "6.6", price: "590", img: "slide-3.png" }
+{ name:"Название №15", platform: "Android", category: "Прикладное", rating: 3.4, price: 540, img: "category-1.png" },
+{ name:"Название №239", platform: "Windows", category: "Системное", rating: 8.5, price: 1200, img: "category-2.png" },
+{ name:"Название №41", platform: "IOS", category: "Прикладное", rating: 11.3, price: 5100, img: "category-1.png" },
+{ name:"Название №57", platform: "IOS", category: "Прикладное", rating: 8.9, price: 590, img: "category-1.png" },
+{ name:"Название №2", platform: "Windows", category: "Системное", rating: 4.7, price: 3450, img: "category-2.png" },
+{ name:"Название №21", platform: "Linux", category: "Инструментальное", rating: 8.7, price: 2150, img: "slide-3.png" },
+{ name:"Название №296", platform: "Android", category: "Инструментальное", rating: 11.2, price: 8450, img: "slide-3.png" },
+{ name:"Название №79", platform: "Windows", category: "Прикладное", rating: 6.9, price: 150, img: "category-1.png" },
+{ name:"Название №12", platform: "Windows", category: "Прикладное", rating: 8.1, price: 233, img: "category-1.png" },
+{ name:"Название №389", platform: "IOS", category: "Прикладное", rating: 2.3, price: 90, img: "category-1.png" },
+{ name:"Название №36", platform: "Linux", category: "Системное", rating: 4.8, price: 665, img: "category-2.png" },
+{ name:"Название №38", platform: "Windows", category: "Инструментальное", rating: 8.2, price: 600, img: "slide-3.png" },
+{ name:"Название №58", platform: "Android", category: "Системное", rating: 12.7, price: 350, img: "category-2.png" },
+{ name:"Название №4", platform: "Linux", category: "Прикладное", rating: 9.7, price: 2690, img: "category-1.png" },
+{ name:"Название №7", platform: "Windows", category: "Инструментальное", rating: 6.6, price: 590, img: "slide-3.png" }
 ];
 
 const properties = {
@@ -75,7 +75,7 @@ $(document).ready(function()
         var filteredsoftware = applyFilters(software, readCurFilters(properties), properties);
 
         // ПО
-        printSoftware( filteredsoftware, '.items-list' );
+        printSoftware(filteredsoftware, '.items-list');
     });
 });
 
@@ -83,10 +83,6 @@ $(document).ready(function()
     CheckBoxes
 */
 
-function getNumOfSoftware(filter, pushItem, index) {
-    filter[index] = [pushItem];
-    return applyFilters(software, filter, properties).length;
-}
 // Блокировка чекбоксов, при которых не будет результатов
 function blockBadCheckBoxes(filter) {
 
@@ -129,7 +125,7 @@ function correctCheckBoxes(className, index) {
             }
         });
         $.each($(className + ' input:not(.all):checked'), function(index, value){
-            if ($(value).is(':disabled') == false) {
+            if ($(value).is(':disabled') != false) { // ТУТ БЛЯТЬ == было стало !=
                 selectedEnableCount++;
             }
         });
