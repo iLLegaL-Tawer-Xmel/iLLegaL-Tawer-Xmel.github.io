@@ -3,33 +3,32 @@
 */
 
 const software = [  
-{ name:"Название №15", platform: "Android", category: "Прикладное", rating: 3.4, price: 540, img: "category-1.png" },
-{ name:"Название №239", platform: "Windows", category: "Системное", rating: 8.5, price: 1200, img: "category-2.png" },
-{ name:"Название №41", platform: "IOS", category: "Прикладное", rating: 11.3, price: 5100, img: "category-1.png" },
-{ name:"Название №57", platform: "IOS", category: "Прикладное", rating: 8.9, price: 590, img: "category-1.png" },
-{ name:"Название №2", platform: "Windows", category: "Системное", rating: 4.7, price: 3450, img: "category-2.png" },
-{ name:"Название №21", platform: "Linux", category: "Инструментальное", rating: 8.7, price: 2150, img: "slide-3.png" },
-{ name:"Название №296", platform: "Android", category: "Инструментальное", rating: 11.2, price: 8450, img: "slide-3.png" },
-{ name:"Название №79", platform: "Windows", category: "Прикладное", rating: 6.9, price: 150, img: "category-1.png" },
-{ name:"Название №12", platform: "Windows", category: "Прикладное", rating: 8.1, price: 233, img: "category-1.png" },
-{ name:"Название №389", platform: "IOS", category: "Прикладное", rating: 2.3, price: 90, img: "category-1.png" },
-{ name:"Название №36", platform: "Linux", category: "Системное", rating: 4.8, price: 665, img: "category-2.png" },
-{ name:"Название №38", platform: "Windows", category: "Инструментальное", rating: 8.2, price: 600, img: "slide-3.png" },
-{ name:"Название №58", platform: "Android", category: "Системное", rating: 12.7, price: 350, img: "category-2.png" },
-{ name:"Название №4", platform: "Linux", category: "Прикладное", rating: 9.7, price: 2690, img: "category-1.png" },
-{ name:"Название №7", platform: "Windows", category: "Инструментальное", rating: 6.6, price: 590, img: "slide-3.png" }
+{ name:"Название №15", platform: "Android", category: "Прикладное", rating: 3.4, img: "category-1.png" },
+{ name:"Название №239", platform: "Windows", category: "Системное", rating: 8.5, img: "category-2.png" },
+{ name:"Название №41", platform: "IOS", category: "Прикладное", rating: 11.3, img: "category-1.png" },
+{ name:"Название №57", platform: "IOS", category: "Прикладное", rating: 8.9, img: "category-1.png" },
+{ name:"Название №2", platform: "Windows", category: "Системное", rating: 4.7, img: "category-2.png" },
+{ name:"Название №21", platform: "Linux", category: "Инструментальное", rating: 8.7, img: "slide-3.png" },
+{ name:"Название №296", platform: "Android", category: "Инструментальное", rating: 11.2, img: "slide-3.png" },
+{ name:"Название №79", platform: "Windows", category: "Прикладное", rating: 6.9, img: "category-1.png" },
+{ name:"Название №12", platform: "Windows", category: "Прикладное", rating: 8.1, img: "category-1.png" },
+{ name:"Название №389", platform: "IOS", category: "Прикладное", rating: 2.3, img: "category-1.png" },
+{ name:"Название №36", platform: "Linux", category: "Системное", rating: 4.8, img: "category-2.png" },
+{ name:"Название №38", platform: "Windows", category: "Инструментальное", rating: 8.2, img: "slide-3.png" },
+{ name:"Название №58", platform: "Android", category: "Системное", rating: 12.7, img: "category-2.png" },
+{ name:"Название №4", platform: "Linux", category: "Прикладное", rating: 9.7, img: "category-1.png" },
+{ name:"Название №7", platform: "Windows", category: "Инструментальное", rating: 6.6, img: "slide-3.png" }
 ];
 
 const properties = {
 	'platform':    { type: 'not_num',  index: 0 ,  val: ['Android', 'IOS', 'Linux', 'Windows']},
 	'category':     { type: 'not_num',    index: 1,     val: ['Прикладное', 'Системное', 'Инструментальное']},
 	'rating':   { type: 'num',    index: 2,     val: ['1_3', '3_6', '6_8', 'm8']},
-    'price':     { type: 'num',    index: 3,     val: ['0_200', '200_500', '500_1000', '1000_2000', 'm2000']}
 };
 
 function printSoftware(softwareArray, selector) {
     const template = 
-'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> <p class="software-price">{{price}}$</p> </li>';
+'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> </li>';
     var output = "";
 
     softwareArray.forEach(element => {
@@ -38,7 +37,6 @@ function printSoftware(softwareArray, selector) {
         tmpItem = tmpItem.replace('{{platform}}', element.platform);
         tmpItem = tmpItem.replace('{{category}}', element.category);
         tmpItem = tmpItem.replace('{{rating}}', element.rating);
-        tmpItem = tmpItem.replace('{{price}}', element.price);
         
         output+= tmpItem;
     });
