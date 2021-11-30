@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+
+//Подключаемся к базе данных
+require $_SERVER['DOCUMENT_ROOT'].'/include/db.php';
+
+//Подключаем скрипт проверки авторизации
+require $_SERVER['DOCUMENT_ROOT'].'/include/check_auth.php';
+
+//Подключаем скрипт проверки ошибок
+include $_SERVER['DOCUMENT_ROOT'].'/include/error.php';
+$error = new errors();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +25,13 @@
     <link rel="stylesheet" href="./css/owl.carousel.css">
     <link rel="stylesheet" href="./css/owl.theme.default.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./css/modal.css?v=2"/>
     <link rel="stylesheet" href="./styles.css"/>
 
     <link rel="stylesheet" type="text/css" href="./styles.css" media="print" />
+
+    <script src="https://kit.fontawesome.com/653875a875.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -21,7 +40,7 @@
     <div class="container">
         <nav class="navbar navbar-light navbar-expand-lg">
 
-            <a class="navbar-brand" href="index.html"><img class="image-main" src="./images/logo.png" alt=""></a>
+            <a class="navbar-brand" href="/"><img class="image-main" src="./images/logo.png" alt=""></a>
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
@@ -57,11 +76,28 @@
                         <a href=""><img src="./images/social-network-2.png" alt=""></a>
                         <a href=""><img src="./images/social-network-3.png" alt=""></a>
                     </div>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><img src="./images/search.png" alt="">
-                        </button>
-                    </form>
+                    <div>
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit"><img src="./images/search.png"></button>
+                        </form>
+                        <?php
+                        if ($auth === false){
+                        ?>
+                        <a href="javascript:void(0)" onclick="document.getElementById('auth').style.display='block';"><i class="fas fa-user"></i>Авторизация</a>
+                        <a href="javascript:void(0)" onclick="document.getElementById('registration').style.display='block';"><i class="fas fa-fingerprint"></i>Регистрация</a>
+                        <?php
+                        }else{
+                        ?>
+                            <a href="/lk/"><b><?=$db->query("SELECT 'fio' FROM 'users' WHERE 'id'='$user_id'")->fetch_assoc()['fio']?></b></a>
+                            <br>
+                            <a href="/lk/profile/"><i class="fas fa-user-cog"></i>Профиль</a>
+                            <br>
+                            <a href="/lk/auth/logout.php"><i class="fas fa-sign-out-alt"></i>Выйти</a>
+                        <?
+                        }
+                        ?>
+                    </div>
                 </div>
 
             </div>
@@ -75,6 +111,141 @@
     </div>
 </header>
 
+<?php
+if ($auth === false){
+?>
+<!-- Регистрация -->
+<div id="registration" class="parent_popup_click" >
+    <div class="popup_click">
+        <h2>Регистрация пользователя</h2>
+        <?php
+        if($_GET['p'] === 'registration') {
+            echo $error->view();
+        }
+        ?>
+        <p>
+        <p>
+        <center>
+            <form action="/lk/auth/registration.php" method="post" enctype="multipart/form-data">
+                <h6>Все поля обязательны для заполнения!</h6>
+                <div class="mb-3">
+                    <h5>Логин (позже изменение недоступно)</h5>
+                    <input name="login" required class="form-control me-2" type="text" placeholder="Ваш логин" aria-label="Логин">
+                </div>
+                <div class="mb-3">
+                    <h5>Пароль</h5>
+                    <input name="password" required class="form-control me-2" type="password" placeholder="Ваш пароль" aria-label="Пароль">
+                </div>
+                <div class="mb-3">
+                    <h5>Подтвердите пароль</h5>
+                    <input name="confirm_password" required class="form-control me-2" type="password" placeholder="Подтвердите Ваш пароль" aria-label="Подтверждение пароля">
+                </div>
+                <div class="mb-3">
+                    <h5>ФИО</h5>
+                    <input name="fio" required class="form-control me-2" type="text" placeholder="Введите своё ФИО" aria-label="ФИО">
+                </div>
+                <div class="mb-3">
+                    <h5>Электронная почта</h5>
+                    <input name="email" required class="form-control me-2" type="email" placeholder="Введите Ваш EMal" aria-label="EMail">
+                </div>
+                <div class="mb-3">
+                    <h5>Аватарка</h5>
+                    <input name="avatar" required class="form-control me-2" type="file">
+                </div>
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+        </center>
+        <a class="close" title="Закрыть" onclick="document.getElementById('registration').style.display='none';">X</a>
+    </div>
+</div>
+
+<!-- Авторизация -->
+<div id="auth" class="parent_popup_click">
+    <div class="popup_click">
+        <h2>Авторизация</h2>
+        <?php
+        if($_GET['p'] === 'auth') {
+            echo $error->view();
+        }
+        ?>
+        <p>
+        <center>
+            <form action="/lk/auth/login.php" method="post">
+                <div class="mb-3">
+                    <h5>Логин</h5>
+                    <input name="login" class="form-control me-2" type="text" placeholder="Ваш логин или EMail" aria-label="Логин">
+                </div>
+                <div class="mb-3">
+                    <h5>Пароль</h5>
+                    <input name="password" class="form-control me-2" type="password" placeholder="Ваш пароль" aria-label="Пароль">
+                    <a href="javascript:void(0)" onclick="document.getElementById('reset_password').style.display='block';document.getElementById('auth').style.display='none';"">Восстановить пароль</a>
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+        </center>
+        <a class="close" title="Закрыть" onclick="document.getElementById('auth').style.display='none';">X</a>
+    </div>
+</div>
+
+    <!-- Восстановление пароля -->
+    <div id="reset_password" class="parent_popup_click">
+        <div class="popup_click">
+            <h2>Восстановление пароля</h2>
+            <?php
+            if($_GET['p'] === 'reset_password') {
+                echo $error->view();
+            }
+            ?>
+            <p>
+            <center>
+                <form action="/lk/auth/reset_password.php" method="post">
+                    <div class="mb-3">
+                        <h5>Введите логин или EMail</h5>
+                        <input name="login" class="form-control me-2" type="text" placeholder="Ваш логин или EMail" aria-label="Логин">
+                        <a href="javascript:void(0)" onclick="document.getElementById('reset_password').style.display='none';document.getElementById('auth').style.display='block';"">Я вспомнил пароль</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Восстановить</button>
+                </form>
+            </center>
+            <a class="close" title="Закрыть" onclick="document.getElementById('auth').style.display='none';">X</a>
+        </div>
+    </div>
+<?php
+if ($_GET['p'] === 'auth'){
+    ?>
+    <script type="text/javascript">
+        $(function(){
+            document.getElementById('auth').style.display='block';
+        });
+    </script>
+    <?php
+}
+?>
+<?php
+if ($_GET['p'] === 'registration'){
+    ?>
+    <script type="text/javascript">
+        $(function(){
+            document.getElementById('registration').style.display='block';
+        });
+    </script>
+    <?php
+}
+?>
+    <?php
+    if ($_GET['p'] === 'reset_password'){
+    ?>
+    <script type="text/javascript">
+        $(function(){
+            document.getElementById('reset_password').style.display='block';
+        });
+    </script>
+    <?php
+}
+    ?>
+<?php
+}
+?>
 <main>
     <section class="top-section">
         <div class="top-slider owl-carousel owl-theme">

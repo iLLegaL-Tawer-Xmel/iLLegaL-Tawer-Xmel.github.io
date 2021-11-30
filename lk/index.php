@@ -1,3 +1,23 @@
+<?php
+
+session_start();
+
+//Подключаемся к базе данных
+require $_SERVER['DOCUMENT_ROOT'].'/include/db.php';
+
+//Подключаем скрипт проверки авторизации
+require $_SERVER['DOCUMENT_ROOT'].'/include/check_auth.php';
+
+//Подключаем скрипт проверки ошибок
+include $_SERVER['DOCUMENT_ROOT'].'/include/error.php';
+$error = new errors();
+
+//Проверяем наличие авторизации
+if ($auth !== true){
+    header("Location: /");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,14 +26,17 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@100;400;500&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="./css/owl.carousel.css">
-    <link rel="stylesheet" href="./css/owl.theme.default.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./filter.css"/>
+
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/modal.css?v=2"/>
+    <link rel="stylesheet" href="/styles.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/styles.css" media="print" />
+
+    <script src="https://kit.fontawesome.com/653875a875.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -22,11 +45,11 @@
     <div class="container">
         <nav class="navbar navbar-light navbar-expand-lg">
 
-            <a class="navbar-brand" href="/?page=filter-page"><img class="image-main" src="./images/logo.png" alt=""></a>
+            <a class="navbar-brand" href="/"><img class="image-main" src="/images/logo.png" alt=""></a>
             <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html"><img src="./images/home.png" alt=""></a>
+                        <a class="nav-link active" aria-current="page" href="#"><img src="/images/home.png" alt=""></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -52,16 +75,23 @@
                 </ul>
                 <div class="header-r">
                     <div class="social-networks">
-                        <a href="filter-page.html"><img src="./images/filter.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-1.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-2.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-3.png" alt=""></a>
+                        <a href="" onclick="javascript:window.print()"><img src="/images/print.png" alt=""></a>
+                        <a href="/filter-page.html"><img src="/images/filter.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-1.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-2.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-3.png" alt=""></a>
                     </div>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><img src="./images/search.png" alt="">
-                        </button>
-                    </form>
+                    <div>
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit"><img src="/images/search.png"></button>
+                        </form>
+                            <a href="/lk/"><b><?=$db->query("SELECT `fio` FROM `users` WHERE `id`='$user_id'")->fetch_assoc()['fio']?></b></a>
+                            <br>
+                            <a href="/lk/profile/"><i class="fas fa-user-cog"></i>Профиль</a>
+                            <br>
+                            <a href="/lk/auth/logout.php"><i class="fas fa-sign-out-alt"></i>Выйти</a>
+                    </div>
                 </div>
 
             </div>
@@ -76,177 +106,10 @@
 </header>
 
 <main>
-    <section class="top-section">
-        <div class="top-slider owl-carousel owl-theme">
-            <div class="item_header">
-                <div class="top-slide top-slide1">
-                    <div class="container">
-                        <div class="slide-text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item_header">
-                <div class="top-slide top-slide2">
-                    <div class="container">
-                        <div class="slide-text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item_header">
-                <div class="top-slide top-slide1">
-                    <div class="container">
-                        <div class="slide-text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="about-section">
-        <div class="container">
-            <div class="about-block">
-
-                <p>
-                    <span>Software</span>
-                    Here is a selection of several products for different platforms and different categories with a certain rating by market
-                </p>
-            </div>
-        </div>
-    </section>
-    <section class="services-section">
-        <div class="container">
-            <h2 class="h2-tm">
-                <span>Product Selection</span>
-            </h2>
-            <div class="nav2">
-                <nav class="categories">
-
-                    <div class="category">
-                    <h3>Платформа</h3>
-                    <ul class="platform-ul">
-                        <li>
-                            <label>
-                                <input name="platform" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любая</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="platform" value="Android" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Android</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="platform" value="IOS" type="checkbox">
-                                <span class="fake"></span>
-                                <span>iOS</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="platform" value="Linux" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Linux</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="platform" value="Windows" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Windows</span>
-                            </label>
-                        </li>
-                    </ul>
-                    </div>
-
-                    <div class="category">
-                    <h3>Категория</h3>
-                    <ul class="category-ul">
-                        <li>
-                            <label>
-                                <input name="category" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любая</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="category" value="Прикладное" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Прикладное</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="category" value="Системное" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Системное</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="category" value="Инструментальное" type="checkbox">
-                                <span class="fake"></span>
-                                <span>Инструментальное</span>
-                            </label>
-                        </li>
-                    </ul>
-                    </div>
-
-                    <div class="category">
-                    <h3>Рейтинг</h3>
-                    <ul class="rating-ul">
-                        <li>
-                            <label>
-                                <input name="rating" class="all" value="all" type="checkbox" checked>
-                                <span class="fake"></span>
-                                <span>Любой</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="1_3" type="checkbox">
-                                <span class="fake"></span>
-                                <span>1/3</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="3_6" type="checkbox">
-                                <span class="fake"></span>
-                                <span>3/6</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="6_8" type="checkbox">
-                                <span class="fake"></span>
-                                <span>6/8</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input name="rating" value="m8" type="checkbox">
-                                <span class="fake"></span>
-                                <span>8/➜</span>
-                            </label>
-                        </li>
-                    </ul>
-                    </div>
-                </nav>
-            </div>
-            <div>
-                <ul class="items-list">
-                    
-                    
-                </ul>
-            </div>    
-        </div>
+    <section class="container" style="margin-top: 15em">
+        <h4><?=$db->query("SELECT `fio` FROM `users` WHERE `id`='$user_id'")->fetch_assoc()['fio']?>, добро пожаловать в закрытый раздел портала! Вы успешно авторизованы!</h4>
+        <p>На вкладке "Профиль" Вы можете изменить свои данные (кроме логина).</p>
+        <img src="/images/closedroom.png">
     </section>
 </main>
 
@@ -255,16 +118,16 @@
         <div class="container">
             <div class="footer-top-wrapper">
                 <div class="footer-top-l">
-                    <img src="./images/logo-footer.png" alt="">
+                    <img src="/images/logo-footer.png" alt="">
                 </div>
                 <div class="footer-top-c">
                     <div class="social-networks">
-                        <a href=""><img src="./images/social-network-1.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-2.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-3.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-4.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-5.png" alt=""></a>
-                        <a href=""><img src="./images/social-network-6.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-1.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-2.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-3.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-4.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-5.png" alt=""></a>
+                        <a href=""><img src="/images/social-network-6.png" alt=""></a>
                     </div>
                 </div>
                 <div class="footer-top-r">
@@ -272,7 +135,7 @@
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <form class="form-footer">
                         <input type="email">
-                        <button type="submit"><img src="./images/mail.png" alt=""></button>
+                        <button type="submit"><img src="/images/mail.png" alt=""></button>
                     </form>
                 </div>
             </div>
@@ -364,11 +227,9 @@
     </div>
 </footer>
 
-<script src="./js/jquery-3.2.1.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/owl.carousel.js"></script>
-<script src="./js/filter.js"></script>
-
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.js"></script>
 
 <script>
     $(document).ready(function () {
