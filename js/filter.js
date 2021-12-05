@@ -1,220 +1,376 @@
-/* 
-    Данные
-*/
+const tireArray = new Array(
+  {
+    id: 0,
+    name: "30",
+    os: "Windows",
+    ram: "2",
+    ssd: "250",
+  },
+  {
+    id: 1,
+    name: "60",
+    os: "Windows",
+    ram: "8",
+    ssd: "500",
+  },
+  {
+    id: 2,
+    name: "90",
+    os: "Windows",
+    ram: "2",
+    ssd: "500",
+  },
+  {
+    id: 3,
+    name: "120",
+    os: "Linux",
+    ram: "16",
+    ssd: "1000",
+  },
+  {
+    id: 4,
+    name: "150",
+    os: "Linux",
+    ram: "16",
+    ssd: "500",
+  },
+  {
+    id: 5,
+    name: "180",
+    os: "Windows",
+    ram: "2",
+    ssd: "60",
+  },
+  {
+    id: 6,
+    name: "210",
+    os: "Linux",
+    ram: "2",
+    ssd: "250",
+  },
+  {
+    id: 7,
+    name: "240",
+    os: "Windows",
+    ram: "8",
+    ssd: "250",
+  },
+  {
+    id: 8,
+    name: "270",
+    os: "Linux",
+    ram: "2",
+    ssd: "60",
+  }
+);
 
-const software = [  
-{ name:"Название №15", platform: "Android", category: "Прикладное", rating: 3.4, img: "category-1.png" },
-{ name:"Название №239", platform: "Windows", category: "Системное", rating: 8.5, img: "category-2.png" },
-{ name:"Название №41", platform: "IOS", category: "Прикладное", rating: 11.3, img: "category-1.png" },
-{ name:"Название №57", platform: "IOS", category: "Прикладное", rating: 8.9, img: "category-1.png" },
-{ name:"Название №2", platform: "Windows", category: "Системное", rating: 4.7, img: "category-2.png" },
-{ name:"Название №21", platform: "Linux", category: "Инструментальное", rating: 8.7, img: "slide-3.png" },
-{ name:"Название №296", platform: "Android", category: "Инструментальное", rating: 11.2, img: "slide-3.png" },
-{ name:"Название №79", platform: "Windows", category: "Прикладное", rating: 6.9, img: "category-1.png" },
-{ name:"Название №12", platform: "Windows", category: "Прикладное", rating: 8.1, img: "category-1.png" },
-{ name:"Название №389", platform: "IOS", category: "Прикладное", rating: 2.3, img: "category-1.png" },
-{ name:"Название №36", platform: "Linux", category: "Системное", rating: 4.8, img: "category-2.png" },
-{ name:"Название №38", platform: "Windows", category: "Инструментальное", rating: 8.2, img: "slide-3.png" },
-{ name:"Название №58", platform: "Android", category: "Системное", rating: 12.7, img: "category-2.png" },
-{ name:"Название №4", platform: "Linux", category: "Прикладное", rating: 9.7, img: "category-1.png" },
-{ name:"Название №7", platform: "Windows", category: "Инструментальное", rating: 6.6, img: "slide-3.png" }
-];
+const propertyNames = ["os", "ram", "ssd"];
 
 const properties = {
-	'platform':    { type: 'not_num',  index: 0 ,  val: ['Android', 'IOS', 'Linux', 'Windows']},
-	'category':     { type: 'not_num',    index: 1,     val: ['Прикладное', 'Системное', 'Инструментальное']},
-	'rating':   { type: 'num',    index: 2,     val: ['1_3', '3_6', '6_8', 'm8']},
+  os: ["Windows", "Linux"],
+  ram: ["16", "8", "2"],
+  ssd: ["1000", "500", "250", "60"],
 };
 
-function printSoftware(softwareArray, selector) {
-    const template = 
-'<li class="item"> <p class="software-name">{{name}}</p> <p class="software-platform">{{platform}}</p> <p class="software-category">{{category}}</p> <p class="software-rating">{{rating}}</p> </li>';
-    var output = "";
+//Этот скрипт вызовется, когда документ полностью загружен
+$("document").ready(function () {
+  //Находим наш див, в котором будут карточки лежать, он заранее сверстан
+  var container = document.getElementById("card-container");
+  var filter = $(".filter");
+  //Вызываем скрипт, когда документ полностью загрузится
+  addTires(tireArray, propertyNames, container);
+  addCheckboxes(properties, filter);
 
-    softwareArray.forEach(element => {
-        var tmpItem;
-        tmpItem = template.replace('{{name}}', element.name);
-        tmpItem = tmpItem.replace('{{platform}}', element.platform);
-        tmpItem = tmpItem.replace('{{category}}', element.category);
-        tmpItem = tmpItem.replace('{{rating}}', element.rating);
-        
-        output+= tmpItem;
+  var cardArray = document.getElementsByClassName("card");
+  var checkBoxArray = $('input[type="checkbox"]');
+
+  for (var checkBox of checkBoxArray) {
+    $(checkBox).prop("checked", false);
+    $(checkBox).prop("disabled", false);
+  }
+
+  $('button[class="reset-btn"]').click(function () {
+    disableUselessCheckBoxes(cardArray, checkBoxArray, propertyNames);
+
+    for (var checkBox of checkBoxArray) {
+      $(checkBox).prop("checked", false);
+      $(checkBox).prop("disabled", false);
+    }
+
+    applyFilters(checkBoxArray, cardArray);
+  });
+
+  disableUselessCheckBoxes(cardArray, checkBoxArray, propertyNames);
+
+  applyFilters(checkBoxArray, cardArray);
+
+  for (let checkBox of checkBoxArray) {
+    $(checkBox).change(function (event) {
+      applyFilters(checkBoxArray, cardArray);
     });
-    $(selector).html(output);
-
-    $.each($(".item"), function(index, value) {
-
-        value.style.backgroundImage = "url('./images/filter/" + softwareArray[index].img + "')";
-    });
-}
-
-var arrOfEls = [];
-
-$(document).ready(function()
-{
-    $.each(properties, function(){arrOfEls.push(true);});
-
-    printSoftware(software, '.items-list');
-    $('.categories input').change(function()
-    {
-        // Корректировка чекбоксов
-        correctAllCheckBoxes(properties);
-
-        // Текущий фильтр
-        var curFilter = readCurFilters(properties);
-
-        // Блокировка чекбоксов, при которых не будет результатов
-        blockBadCheckBoxes(curFilter);
-
-        // Корректировка чекбоксов
-        correctAllCheckBoxes(properties);
-
-        // Получение по фильтрам ПО
-        var filteredsoftware = applyFilters(software, readCurFilters(properties), properties);
-
-        // ПО
-        printSoftware(filteredsoftware, '.items-list');
-    });
+  }
 });
 
-/* 
-    CheckBoxes
-*/
+function applyFilters(checkBoxArray, cardArray) {
+  let checkedCheckBoxes = new Map();
 
-// Блокировка чекбоксов, при которых не будет результатов
-function blockBadCheckBoxes(filter) {
-
-    $.each(properties, function (index, value) {
-        value.val.forEach(element => {
-            var item = $("." + index + "-ul input[value='" + element + "']");
-            if (getNumOfSoftware(Object.assign({}, filter), element, index) == 0)
-                item.prop('disabled', true);
-            else {
-                item.prop('disabled', false);
-            }
-        });
-    });
-}
-// Корректировка чекбоксов
-function correctAllCheckBoxes(properties) {
-    $.each(properties, function(index, value) {
-        var className = '.' + index + '-ul';
-        var ind = value.index;
-        correctCheckBoxes(className, ind);
-    });
-}
-function correctCheckBoxes(className, index) {
-
-    var all = $(className + ' .all');
-    var items = $(className + ' input:not(.all)');
-    var count = $(className + ' input:not(.all):checked').length;
-
-    if (all.is(':checked') && arrOfEls[index] == false) // нажали на all
-    {
-        items.prop('checked', true);
+  //Добавляем по каждому параметру актуальные выбранные значения
+  for (const checkBox of checkBoxArray) {
+    if (checkBox.checked) {
+      if (!checkedCheckBoxes.has(checkBox.name)) {
+        checkedCheckBoxes.set(checkBox.name, [checkBox.value]);
+      } else {
+        checkedCheckBoxes.get(checkBox.name).push(checkBox.value);
+      }
     }
-    else
-    {
-        var enableItemsCount = 0;
-        var selectedEnableCount = 0;
-        $.each(items, function(index, value){
-            if ($(value).is(':disabled') == false) {
-                enableItemsCount++;
-            }
-        });
-        $.each($(className + ' input:not(.all):checked'), function(index, value){
-            if ($(value).is(':disabled') == false) { 
-                selectedEnableCount++;
-            }
-        });
-        // Если выбраны все элементы или ни одного - загорается чекбокс all. Иначе он неактивен
-        all.prop('checked', (count == 0 || enableItemsCount == selectedEnableCount));
-    }
-    arrOfEls[index] = all.is(':checked');
-}
-function getNumOfSoftware(filter, pushItem, index) {
-    filter[index] = [pushItem];
-    return applyFilters(software, filter, properties).length;
-}
+  }
 
-/* 
-    Filters
-*/
+  let showThis = [];
 
-function applyFilters(software, filter, properties) {
-    var result = [];
-    var ok = [];
-    software.forEach(soft => {
-        $.each(properties, function(index, value) {
-            ok[value.index] = false;
-            if (filter[index].indexOf('all') > -1) 
-            {
-                ok[value.index] = true;
-            }
-            else switch (value.type) {
-                case 'not_num':
-                    ok[value.index] = filtersoftTypeNotNum(soft, filter, index, value);
-                    break;
-                case 'num':
-                    ok[value.index] = filtersoftTypeNum(soft, filter, index, value);
-                    break;
-                default:
-                    console.log('filter type ' + value.type + ' is not exists');
-                    alert('ERROR', 'filter type ' + value.type + ' is not exists');
-            }
-        });
-        var thatsoftIsOk = true;
-        ok.forEach(element => {
-            if (element == false) thatsoftIsOk = false;
-        });
-        if (thatsoftIsOk) result.push(soft);
-    });
-    return result;
-}
+  if (checkedCheckBoxes.size > 0) {
+    showThis = giveMeArray(checkedCheckBoxes, cardArray);
 
-function filtersoftTypeNotNum(soft, filter, Index, Value) {
-    if (filter[Index].indexOf(soft[Index]) > -1) 
-        return true;
-    return false;
-}
+    for (const checkBox of checkBoxArray) {
+      if (true) {
+        var newIds = checkthisParameter(
+          checkBox,
+          propertyNames,
+          checkBoxArray,
+          cardArray
+        );
 
-function filtersoftTypeNum(soft, filter, Index, Value) {
-    var ok = false;
-
-    Value.val.forEach(element => {
-        if (filter[Index].indexOf(element) > -1)
-        {
-            if (element.includes('_'))
-            {
-                var arr = element.split('_');
-                var left = parseFloat(arr[0]);
-                var right = parseFloat(arr[1]);
-                if (soft[Index] >= left && soft[Index] <= right) 
-                    ok = true;
-            }
-            if (element.includes('l'))
-            {
-                if (soft[Index] < parseFloat(element.replace('l', ''))) 
-                    ok = true;
-            }
-            if (element.includes('m'))
-            {
-                if (soft[Index] > parseFloat(element.replace('m', ''))) 
-                    ok = true;
-            }
+        if (newIds.length == 0) {
+          $(checkBox).prop("disabled", true);
+        } else if (compare(showThis, newIds)) {
+          $(checkBox).prop("disabled", true);
+        } else {
+          $(checkBox).prop("disabled", false);
         }
-    });
-    return ok;
-}
-// Текущий фильтр
-function readCurFilters(properties) {
-    var result = [];
+      }
+    }
+  } else {
+    disableUselessCheckBoxes(cardArray, checkBoxArray, propertyNames);
 
-    $.each(properties, function(index){
-        var searchIDs = $(".categories input[name='" + index + "']:checkbox:checked").map(function(){
-            return $(this).val();
-        }).get(); 
-        result[index] = searchIDs;
-    });
-    return result;
+    for (const card of cardArray) {
+      showThis.push($(card).data("id"));
+    }
+  }
+
+  showCards(showThis, cardArray);
+}
+
+function showCards(cardIdArray, cardArray) {
+  for (const card of cardArray) {
+    $(card).addClass("hide");
+
+    let id = $(card).data("id");
+
+    if (cardIdArray.includes(id)) {
+      $(card).removeClass("hide");
+    }
+  }
+}
+
+function checkthisParameter(
+  checkBoxToCheck,
+  properties,
+  checkBoxArray,
+  cardArray
+) {
+  let checkedCheckBoxes = new Map();
+
+  for (const checkBox of checkBoxArray) {
+    if (checkBox.checked) {
+      if (!checkedCheckBoxes.has(checkBox.name)) {
+        checkedCheckBoxes.set(checkBox.name, [checkBox.value]);
+      } else {
+        checkedCheckBoxes.get(checkBox.name).push(checkBox.value);
+      }
+    }
+  }
+
+  //Добавляем или удаляем, в зависимости от состояния чекбокса (был выбран или нет)
+
+  if (checkBoxToCheck.checked) {
+    let index = checkedCheckBoxes
+      .get(checkBoxToCheck.name)
+      .indexOf(checkBoxToCheck.value);
+    if (index > -1) {
+      checkedCheckBoxes.get(checkBoxToCheck.name).splice(index, 1);
+    }
+  } else {
+    if (checkedCheckBoxes.has(checkBoxToCheck.name)) {
+      checkedCheckBoxes.get(checkBoxToCheck.name).push(checkBoxToCheck.value);
+    } else {
+      checkedCheckBoxes.set(checkBoxToCheck.name, [checkBoxToCheck.value]);
+    }
+  }
+
+  for (const [key, value] of checkedCheckBoxes) {
+    if (checkedCheckBoxes.get(key).length == 0) {
+      checkedCheckBoxes.delete(key);
+    }
+  }
+
+  if (checkedCheckBoxes.size == 0) {
+    let allCardIds = [];
+
+    for (const card of cardArray) {
+      allCardIds.push(card.dataset.id);
+    }
+
+    return allCardIds;
+  }
+
+  return giveMeArray(checkedCheckBoxes, cardArray);
+}
+
+//Выдает массив идентификаторов тех карточек, которые подходят под набор чекбоксов
+function giveMeArray(mapWithCheckedCheckBoxes, cardArray) {
+  for (const card of cardArray) {
+    $(card).data("match", true);
+  }
+
+  let newCardArray = [];
+
+  let mapWithCards = new Map();
+
+  for (const [parameter, values] of mapWithCheckedCheckBoxes.entries()) {
+    for (const card of cardArray) {
+      //Если наша карточка подходит под выбранные характеристики
+      if (values.includes("" + $(card).data(parameter))) {
+        if (mapWithCards.has(card)) {
+          mapWithCards.get(card).push($(card).data(parameter));
+        } else {
+          mapWithCards.set(card, [$(card).data(parameter)]);
+        }
+      }
+    }
+  }
+
+  //Тут странно
+  for (const [key, value] of mapWithCards.entries()) {
+    if (value.length == mapWithCheckedCheckBoxes.size) {
+      newCardArray.push($(key).data("id"));
+    }
+  }
+
+  newCardArray.sort(function (a, b) {
+    return a - b;
+  });
+
+  return newCardArray;
+}
+
+function compare(a1, a2) {
+  return a1.length == a2.length && a1.every((v, i) => v === a2[i]);
+}
+
+function disableUselessCheckBoxes(cardArray, checkBoxArray, properties) {
+  for (var checkBox of checkBoxArray) {
+    $(checkBox).prop("disabled", true);
+  }
+
+  for (const card of cardArray) {
+    for (const property of properties) {
+      let name = property;
+      let value = $(card).data(property);
+
+      $(`input[type="checkbox"][name="${name}"][value="${value}"]`).prop(
+        "disabled",
+        false
+      );
+    }
+  }
+}
+
+function uncheckWrongCheckBoxes(
+  cardIdArray,
+  cardArray,
+  checkBoxArray,
+  properties
+) {
+  for (const card of cardArray) {
+    let id = $(card).data("id");
+
+    if (!cardIdArray.includes(id)) {
+      for (const property of properties) {
+        let name = property;
+        let value = $(card).data(property);
+
+        var checkBox = $(
+          `input[type="checkbox"][name="${name}"][value="${value}"]`
+        );
+
+        $(checkBox).prop("checked", false);
+      }
+    }
+  }
+}
+
+//контейнер - тот див, куда вставляются карточки
+function addTires(array, properties, container) {
+  //Массив с данными
+  for (const key in array) {
+    var tire = array[key];
+    //создание элемента
+    var newCard = document.createElement("div");
+
+    //Добавление класса со стилями, который описывает внешний вид карточки
+    newCard.className = "card";
+
+    //здесь создаются и устанавливаются data-аттрибуты, заполняются данными из массива с карточками
+    newCard.dataset.id = tire.id;
+    newCard.dataset.name = tire.name;
+
+    for (const property of properties) {
+      $(newCard).attr("data-" + property, tire[property]);
+    }
+    newCard.dataset.match = true;
+
+    //html, который будет соответствовать этой карточке
+    //Обрати внимание на кавычки у строки, они находятся на букве Ё
+    let a = `<div class="price-block"><div class="price-block__price">${tire.name}$
+    </div><div class="price-txt">${tire.os}
+    </div> <div class="price-txt">${tire.ram}
+    </div><div class="price-txt">${tire.ssd}
+    </div></div>`;
+
+    //Это обязательно, иначе он не понимает такую строку
+    //Мы вставляем заготовленный html в карточку
+    newCard.innerHTML = "" + a;
+
+    //говорим контейнеру добавить карточку в конец
+    container.append(newCard);
+  }
+}
+
+function addCheckboxes(properties, container) {
+  for (const property in properties) {
+    var subsection = document.createElement("div");
+
+    $(subsection).addClass("chkboxs");
+
+    subsection.innerText = property.charAt(0).toUpperCase() + property.slice(1);
+
+    for (const value of properties[property]) {
+      var elem = document.createElement("label");
+
+      elem.innerText = value.charAt(0).toUpperCase() + value.slice(1);
+
+      var newCheckBox = document.createElement("input");
+
+      $(newCheckBox).attr({
+        type: "checkbox",
+        name: property,
+        value: value,
+      });
+
+      elem.prepend(newCheckBox);
+
+      subsection.append(elem);
+    }
+
+    container.append(subsection);
+  }
 }
