@@ -1226,19 +1226,10 @@ p.copyright {
   min-width: 100px;
 }
 
-.btn {
-  cursor: pointer;
-  color: #fff;
-  background: #ffbb42;
-  padding: 8px;
-  text-transform: uppercase;
-  border: 1px solid #cc973b;
-  border-radius: 5px;
-  text-decoration: none;
-  font-style: italic;
-  font-family: "Arkhip";
-  font-size: 16px;
-}
+/*
+      border: 5px solid #cc973b;
+      border-radius: 5px;
+*/
 
 .items-list {
   display: flex;
