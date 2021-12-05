@@ -1,76 +1,34 @@
-const tireArray = new Array(
-  {
-    id: 0,
-    name: "30",
-    os: "Windows",
-    ram: "2",
-    ssd: "250",
-  },
-  {
-    id: 1,
-    name: "60",
-    os: "Windows",
-    ram: "8",
-    ssd: "500",
-  },
-  {
-    id: 2,
-    name: "90",
-    os: "Windows",
-    ram: "2",
-    ssd: "500",
-  },
-  {
-    id: 3,
-    name: "120",
-    os: "Linux",
-    ram: "16",
-    ssd: "1000",
-  },
-  {
-    id: 4,
-    name: "150",
-    os: "Linux",
-    ram: "16",
-    ssd: "500",
-  },
-  {
-    id: 5,
-    name: "180",
-    os: "Windows",
-    ram: "2",
-    ssd: "60",
-  },
-  {
-    id: 6,
-    name: "210",
-    os: "Linux",
-    ram: "2",
-    ssd: "250",
-  },
-  {
-    id: 7,
-    name: "240",
-    os: "Windows",
-    ram: "8",
-    ssd: "250",
-  },
-  {
-    id: 8,
-    name: "270",
-    os: "Linux",
-    ram: "2",
-    ssd: "60",
-  }
-);
-
-const propertyNames = ["os", "ram", "ssd"];
+const propertyNames = ["company", "platform", "category"];
 
 const properties = {
-  os: ["Windows", "Linux"],
-  ram: ["16", "8", "2"],
-  ssd: ["1000", "500", "250", "60"],
+  company: ["Articul Media", "Garpix", "Kinex Media", "Luxoft", "VironIT", "MobileUP"],
+  platform: ["Windows", "Linux", "iOS", "Android"],
+  category: ["Applied", "System", "Instrumental"]
 };
+
+const tireArray = new Array(
+  { id: 0, name: "Software #525xR", company: "Garpix", platform: "Windows", category: "Applied" },
+  { id: 1, name: "Software #62.7IvM04", company: "Kinex Media", platform: "Windows", category: "Instrumental" },
+  { id: 2, name: "Software #23637yu4", company: "Kinex Media", platform: "Android", category: "System" }, 
+  { id: 3, name: "Software #75Utx/X4R", company: "Luxoft", platform: "Windows", category: "Applied" }, 
+  { id: 4, name: "Software #236i.Rr", company: "Articul Media", platform: "iOS", category: "Applied" }, 
+  { id: 5, name: "Software #2xo/Xr", company: "Garpix", platform: "iOS", category: "Instrumental" }, 
+  { id: 6, name: "Software #Yu54.Ro", company: "Articul Media", platform: "Android", category: "Applied" }, 
+  { id: 7, name: "Software #485uxP4", company: "Luxoft", platform: "Windows", category: "System" }, 
+  { id: 8, name: "Software #xxP78", company: "Kinex Media", platform: "Windows", category: "Applied" }, 
+  { id: 9, name: "Software #iuR09p", company: "VironIT", platform: "Android", category: "Applied" }, 
+  { id: 10, name: "Software #P12P1", company: "MobileUP", platform: "Linux", category: "Instrumental" }, 
+  { id: 11, name: "Software #754ot5/rx", company: "Garpix", platform: "iOS", category: "System" }, 
+  { id: 12, name: "Software #ye78wRP", company: "MobileUP", platform: "Linux", category: "System" }, 
+  { id: 13, name: "Software #3859Pq9/St4X", company: "Articul Media", platform: "Android", category: "Instrumental" }, 
+  { id: 14, name: "Software #6012Y.696pre", company: "VironIT", platform: "iOS", category: "System" }, 
+  { id: 15, name: "Software #745hi/Rv9Q", company: "VironIT", platform: "Android", category: "Instrumental" }, 
+  { id: 16, name: "Software #Qw902EX", company: "Luxoft", platform: "Windows", category: "System" }, 
+  { id: 17, name: "Software #bk201PR/Q", company: "Luxoft", platform: "Android", category: "Applied" }, 
+  { id: 18, name: "Software #h.eOY20/mre3", company: "Garpix", platform: "iOS", category: "Instrumental" }, 
+  { id: 19, name: "Software #oVP.34PQx", company: "VironIT", platform: "Android", category: "Applied" }, 
+  { id: 20, name: "Software #Wp56.oqR/409w", company: "MobileUP", platform: "iOS", category: "System" }
+);
 
 //Этот скрипт вызовется, когда документ полностью загружен
 $("document").ready(function () {
@@ -330,10 +288,10 @@ function addTires(array, properties, container) {
 
     //html, который будет соответствовать этой карточке
     //Обрати внимание на кавычки у строки, они находятся на букве Ё
-    let a = `<div class="price-block"><div class="price-block__price">${tire.name}$
-    </div><div class="price-txt">${tire.os}
-    </div> <div class="price-txt">${tire.ram}
-    </div><div class="price-txt">${tire.ssd}
+    let a = `<div class="price-block"><div class="price-block__price">${tire.name}
+    </div><div class="price-txt">${tire.platform}
+    </div> <div class="price-txt">${tire.category}
+    </div><div class="price-txt">${tire.company}
     </div></div>`;
 
     //Это обязательно, иначе он не понимает такую строку
