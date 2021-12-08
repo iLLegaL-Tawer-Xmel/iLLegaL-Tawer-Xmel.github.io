@@ -1,4 +1,11 @@
 
+const propertyNames = ["company", "platform", "category"];
+
+const properties = {
+  company: ["Articul Media", "Garpix", "Kinex Media", "Luxoft", "VironIT", "MobileUP"],
+  platform: ["Windows", "Linux", "iOS", "Android"],
+  category: ["Applied", "System", "Instrumental"]
+};
 
 const tireArray = new Array(
   { id: 0, name: "Software #525xR", company: "Garpix", platform: "Windows", category: "Applied" },
@@ -23,14 +30,6 @@ const tireArray = new Array(
   { id: 19, name: "Software #oVP.34PQx", company: "VironIT", platform: "Android", category: "Applied" }, 
   { id: 20, name: "Software #Wp56.oqR/409w", company: "MobileUP", platform: "iOS", category: "System" }
 );
-
-const propertyNames = ["company", "platform", "category"];
-
-const properties = {
-  company: ["Articul Media", "Garpix", "Kinex Media", "Luxoft", "VironIT", "MobileUP"],
-  platform: ["Windows", "Linux", "iOS", "Android"],
-  category: ["Applied", "System", "Instrumental"]
-};
 
 //Этот скрипт вызовется, когда документ полностью загружен
 $("document").ready(function () {
@@ -207,8 +206,7 @@ function giveMeArray(mapWithCheckedCheckBoxes, cardArray) {
       }
     }
   }
-
-  //Тут странно
+ // Магия! Не трогать!
   for (const [key, value] of mapWithCards.entries()) {
     if (value.length == mapWithCheckedCheckBoxes.size) {
       newCardArray.push($(key).data("id"));
@@ -268,18 +266,18 @@ function uncheckWrongCheckBoxes(
   }
 }
 
-//контейнер - тот див, куда вставляются карточки
+// Контейнер - тот див, куда вставляются карточки
 function addTires(array, properties, container) {
-  //Массив с данными
+  // Массив с данными
   for (const key in array) {
     var tire = array[key];
-    //создание элемента
+    // Создание элемента
     var newCard = document.createElement("div");
 
-    //Добавление класса со стилями, который описывает внешний вид карточки
+    // Добавление класса со стилями, который описывает внешний вид карточки
     newCard.className = "card";
 
-    //здесь создаются и устанавливаются data-аттрибуты, заполняются данными из массива с карточками
+    // Здесь создаются и устанавливаются data-аттрибуты, заполняются данными из массива с карточками
     newCard.dataset.id = tire.id;
     newCard.dataset.name = tire.name;
 
@@ -288,19 +286,15 @@ function addTires(array, properties, container) {
     }
     newCard.dataset.match = true;
 
-    //html, который будет соответствовать этой карточке
-    //Обрати внимание на кавычки у строки, они находятся на букве Ё
     let a = `<div class="price-block"><div class="price-block__price">${tire.name}
     </div><div class="price-txt">${tire.company}
     </div> <div class="price-txt">${tire.platform}
     </div><div class="price-txt">${tire.category}
-    </div></div>`;
+    </div></div>`; 
 
-    //Это обязательно, иначе он не понимает такую строку
-    //Мы вставляем заготовленный html в карточку
     newCard.innerHTML = "" + a;
 
-    //говорим контейнеру добавить карточку в конец
+    // Добавление карточки в конец
     container.append(newCard);
   }
 }
